@@ -24,6 +24,10 @@ angularBeer.config(['$routeProvider',
           templateUrl: 'partials/beer-create.html',
           controller: 'BeerCreateCtrl'
       }).
+      when('/edit/:beerId', {
+          templateUrl: 'partials/beer-edit.html',
+          controller: 'BeerEditCtrl'
+      }).
       otherwise({
         redirectTo: '/beers'
       });

@@ -10,15 +10,20 @@
 
 <div class="row">
 	<div>
-		<div ng-controller="BeerCreateCtrl">
+		<div ng-controller="BeerEditCtrl">
 			<form novalidate class="ui form">
+				<div class="ui reveal hidden content">
+					<input ng-model="beer.id" type="text" />
+					<input ng-model="beer.label" type="text" />
+					<input ng-model="beer.image" type="text" />
+				</div>
 				<div class="two fields">
 					<div class="field">
 						<label>Nom :</label> <input ng-model="beer.name" type="text"
 							placeholder="Nom">
 					</div>
 					<div class="field">
-						<label>Brasserie</label> <input ng-model="beer.place" type="text"
+						<label>Brasserie</label> <input ng-model="beer.brewery" type="text"
 							placeholder="Brasserie">
 					</div>
 				</div>
@@ -26,16 +31,24 @@
 					<div class="field">
 						<label>Disponibilité :</label> <input ng-model="beer.availability"
 							type="text" placeholder="Disponibilité" />
-					</div> 
+					</div>
 					<div class="field">
 						<label>Style</label> <input ng-model="beer.style" type="text"
 							placeholder="Style" />
 					</div>
 				</div>
-				<div class="field">
-					<label>Instructions : </label>
-					<textarea rows="2" ng-model="beer.description"
-						placeholder="Instructions..."></textarea>
+				<div class="two fields">
+					<div class="field">
+						<label>Instructions : </label>
+						<textarea rows="2" ng-model="beer.serving"
+							placeholder="Instructions..."></textarea>
+					</div>
+	
+					<div class="field">
+						<label>Description : </label>
+						<textarea rows="2" ng-model="beer.description"
+							placeholder="Description..."></textarea>
+					</div>
 				</div>
 				<input class="ui submit primary button" type="submit"
 					ng-click="update(beer)" value="Créer" /> <input class="ui button"
