@@ -41,7 +41,7 @@ public class BeerList extends HttpServlet {
 		ObjectMapper mapper = new ObjectMapper();
 		// Tranformation de la liste d'objets en JSON
 		String jsonBeerList = mapper.writeValueAsString(beerList);
-
+		//return beerList;
 		response.getWriter().append(jsonBeerList);
 
 	}

@@ -13,6 +13,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 
 /**
  * @author Vince
@@ -54,33 +55,62 @@ public class BeerMongoDAO {
 	private Beer createBeerWithCursor(MongoCursor<Document> cursor){
 		Document doc = cursor.next();
 		Beer beer = new Beer();
-		beer.setName(doc.getString("Name"));
+		beer.setName(doc.getString("name"));
 		beer.setDescription(doc.getString("description"));
+		beer.setStyle(doc.getString("style"));
+		beer.setBrewery(doc.getString("brewery"));
 		
-		Object alcohol = doc.get("alcohol");
+		/*Object alcohol = doc.get("alcohol");
 		if ( alcohol instanceof Double ){
 			beer.setAlcohol((Double) alcohol);
 		}else{
 			beer.setAlcohol( ( (Integer)alcohol).doubleValue());
-		}
+		}*/
+		beer.setAlcohol(4.5);
 		//beer.setAlcohol(Double.valueOf(doc.getString("alcohol")));
-		beer.setImg(doc.getString("img"));
+		if (doc.getString("id") != null){
+			System.out.println("id" + doc.getString("id"));
+			System.out.println("img" + doc.getString("img"));
+			beer.setImg(doc.getString("img"));
+			beer.setId(doc.getString("id"));
+		}else{
+			beer.setImg("beers/img/"+doc.getString("name")+".jpg");
+			beer.setId(doc.getString("name")+".jpg");
+
+		}
+		
 		return beer;
 	}
+	
+	
 	
 	public void insertBeer(Beer beer){
 		Document doc = this.generateBeerDocument(beer);
 		this.collection.insertOne(doc);
 	}
 	
+	public void updateBeer(Beer updatedBeer){
+		Document newDoc = this.generateBeerDocument(updatedBeer);
+		System.out.println(updatedBeer.getName());
+		Document oldDoc = collection.find(Filters.eq("id", updatedBeer.getId()) ).first();
+		
+		this.collection.findOneAndReplace(Filters.eq("id", updatedBeer.getId()), newDoc);
+		
+	}
+	
 	private Document generateBeerDocument(Beer beer){
 		Document doc = new Document("name", beer.getName())
 			.append("alcohol", beer.getAlcohol())
 			.append("style", beer.getStyle())
-			.append("description", beer.getDrinkInstructions())
+			.append("description", beer.getDescription())
 			.append("availability", beer.getAvailability())
-			.append("place", beer.getPlace())
+			//.append("place", beer.getPlace())
 		;
+		if (beer.getId() != null){
+			doc.append("id", beer.getId())
+				.append("serving", beer.getServing());
+			
+		}
 		return doc;
 	}
 }
