@@ -1,67 +1,75 @@
 <div class="ui container">
 
-    <div class="row">
+	<div class="row">
 		<div class="ui menu">
 			<div class="item">
-			    <div class="ui transparent icon input">
-			      <input ng-model="query" class="prompt" type="text" placeholder="Rechercher...">
-			      <i class="search link icon"></i>
-			    </div>
-		    </div>
-		    <div class="item">
-		    	<a class="ui basic button" href="#/create">
-		    		<i class="icon user"></i> 
-		    		Add Friend
-		    	</a>
-		    </div>
+				<div class="ui transparent icon input">
+					<input ng-model="query" class="prompt" type="text"
+						placeholder="Rechercher..."> <i class="search link icon"></i>
+				</div>
+			</div>
+			<div class="item">
+				<a class="ui basic button" href="#/create"> <i class="icon beer"></i>
+					Ajouter une bière
+				</a>
+			</div>
 			<div class="right item">
 				<div class="ui dropdown">
 					<div class="text">Filtre</div>
-  					<i class="dropdown icon"></i>
-  					<div class="menu" ng-model="orderProp">
-				    	<div class="item" value="name">Alphab�tique</div>
-				      	<div class="item" value="alcohol">Alcool</div>
-				    </div>
-				</div>				
+					<i class="dropdown icon"></i>
+					<div class="menu" ng-model="orderProp">
+						<div class="item" value="name">Alphabétique</div>
+						<div class="item" value="alcohol">Alcool</div>
+					</div>
+				</div>
 			</div>
 			<script type="text/javascript">
-			$('.ui.dropdown')
-			  .dropdown()
-			;
+				$('.ui.dropdown').dropdown();
 			</script>
 		</div>
 		<div class="ui divider"></div>
 	</div>
-			
+
 	<div class="row ">
 		<h2 class="ui header">
-	      <i class="bar icon"></i>
-		  <div class="content">Liste des bieres</div>
+			<i class="bar icon"></i>
+			<div class="content">Liste des bières</div>
 		</h2>
-		
+
 		<div class="ui divider"></div>
 	</div>
-	<div class="row ">	
+	<div class="row ">
 		<div class="column container segment">
-			<div class=" ui link items">
-				<div ng-repeat="beer in beers | filter:query | orderBy:orderProp" class="item">
+			<div class=" ui divided items">
+				<div ng-repeat="beer in beers | filter:query | orderBy:orderProp"
+					class="item">
 					<div class="ui small image">
-					      <img ng-src="{{beer.img}}">
-				    </div>
-				    <div class="content">
+						<img ng-src="{{beer.image}}">
+					</div>
+					<div class="content">
 						<a href="#/beers/{{beer.id}}" class="header">{{beer.name}}</a>
-				      <div class="meta">
-				        <span>Description</span>
-				      </div>
-				      <div class="description">
-				        <p>{{beer.description}}</p>
-				      </div>
-				      <div class="extra">Additional Details </div>
-				    </div>
-	
+				
+						<div class="meta">
+							<span>Description</span>
+						</div>
+						<div class="description">
+							<p>{{beer.description}}</p>
+							<p>{{beer.drinkInstructions}}</p>
+
+						</div>
+						<div class="extra">
+							<a class="ui right floated primary button" href="#/edit/{{beer.id}}">
+								Éditer<i class="right write icon"></i>
+							</a>
+							<div class="ui label"><i class="right write icon"></i>Alcohol : {{ beer.alcohol}}%</div>
+						</div>
+						<div class="extra">Additional Details</div>
+						
+					</div>
+
 				</div>
 			</div>
 		</div>
 	</div>
-  
+
 </div>
