@@ -1,0 +1,49 @@
+
+<div class="row">
+	<div class="ui menu">
+		<a href="#/beers/" class="item"> <i class="reply icon"></i> Retour
+		</a>
+	</div>
+</div>
+
+<div class="ui divider"></div>
+
+<div class="row">
+	<div>
+		<div ng-controller="BeerCreateCtrl">
+			<form novalidate class="ui form">
+				<div class="two fields">
+					<div class="field">
+						<label>Nom :</label> <input ng-model="beer.name" type="text"
+							placeholder="Nom">
+					</div>
+					<div class="field">
+						<label>Brasserie</label> <input ng-model="beer.place" type="text"
+							placeholder="Brasserie">
+					</div>
+				</div>
+				<div class="two fields">
+					<div class="field">
+						<label>Disponibilité :</label> <input ng-model="beer.availability"
+							type="text" placeholder="Disponibilité" />
+					</div> 
+					<div class="field">
+						<label>Style</label> <input ng-model="beer.style" type="text"
+							placeholder="Style" />
+					</div>
+				</div>
+				<div class="field">
+					<label>Instructions : </label>
+					<textarea rows="2" ng-model="beer.drinkingInstructions"
+						placeholder="Instructions..."></textarea>
+				</div>
+				<input class="ui submit primary button" type="submit"
+					ng-click="update(user)" value="Créer" /> <input class="ui button"
+					type="button" ng-click="reset()" value="Reset" />
+			</form>
+			<pre>beer = {{beer | json}}</pre>
+			<pre>master = {{master | json}}</pre>
+		</div>
+
+	</div>
+</div>
