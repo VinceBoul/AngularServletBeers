@@ -2,36 +2,63 @@
 
 /* Controllers */
 
-angular
-  .module('BeerControllers', [])
-  .controller('BeerListCtrl', ['$scope', 'Beer', function($scope, Beer) {
+angular.module('BeerControllers', []).controller('BeerListCtrl',
+		[ '$scope', 'Beer', function($scope, Beer) {
 
-    $scope.beers = Beer.query();
+			$scope.beers = Beer.query();
 
-    $scope.orderProp = 'alcohol';
-  }])
-  .controller('BeerDetailCtrl', ['$scope', '$routeParams', 'Beer', function($scope, $routeParams, Beer) {
+			$scope.orderProp = 'alcohol';
+		} ]).controller(
+		'BeerDetailCtrl',
+		[ '$scope', '$routeParams', 'Beer',
+				function($scope, $routeParams, Beer) {
 
-    $scope.beer = Beer.get({beerId: $routeParams.beerId}, function(beer) {
-      $scope.mainImg = beer.img;
-    });
+					$scope.beer = Beer.get({
+						beerId : $routeParams.beerId
+					}, function(beer) {
+						$scope.mainImg = beer.img;
+					});
 
-    $scope.setImage = function(img) {
-      $scope.mainImg = img;
-    }
-  }])
-  
-  .controller('BeerCreateCtrl', ['$scope', function($scope) {
-	  $scope.master = {};
+					$scope.setImage = function(img) {
+						$scope.mainImg = img;
+					}
+				} ])
 
-      $scope.update = function(beer) {
-        $scope.master = angular.copy(beer);
-      };
+.controller('BeerCreateCtrl', [ '$scope', '$http', function($scope, $http) {
+	$scope.master = {};
+	// create a blank object to handle form data.
+	$scope.beer = {};
+	// calling our submit function.
 
-      $scope.reset = function() {
-        $scope.beer = angular.copy($scope.master);
-      };
+	$scope.update = function(beer) {
 
-      $scope.reset();
-  }]);
+		// Posting data to php file
+		$http({
+			method : 'POST',
+			url : 'BeerCreate',
+			data : $scope.beer, // forms user object
+			headers : {
+				'Content-Type' : 'application/x-www-form-urlencoded'
+			}
+		}).success(function(data) {
+			if (data.errors) {
+				// Showing errors.
+				$scope.errorName = data.errors.name;
+				$scope.errorUserName = data.errors.username;
+				$scope.errorEmail = data.errors.email;
+			} else {
+				$scope.message = data.message;
+			}
+		});
+	};
+/*
+	$scope.update = function(beer) {
+		$scope.master = angular.copy(beer);
+	};
+*/
+	$scope.reset = function() {
+		$scope.beer = angular.copy($scope.master);
+	};
 
+	$scope.reset();
+} ]);
