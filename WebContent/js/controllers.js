@@ -2,36 +2,31 @@
 
 /* Controllers */
 
-angular.module('BeerControllers', []).controller('BeerListCtrl',
-		[ '$scope', 'Beer', function($scope, Beer) {
+angular.module('BeerControllers', [])
+	.controller('BeerListCtrl',	[ '$scope', 'Beer', function($scope, Beer) {
+		$scope.beers = Beer.query();
+		$scope.orderProp = 'alcohol';
+	} ])
+	.controller( 'BeerDetailCtrl', [ '$scope', '$routeParams', 'Beer', function($scope, $routeParams, Beer) {
+		$scope.beer = Beer.get({
+			beerId : $routeParams.beerId
+		}, function(beer) {
+			$scope.mainImg = beer.img;
+		});
 
-			$scope.beers = Beer.query();
-
-			$scope.orderProp = 'alcohol';
-		} ]).controller(
-		'BeerDetailCtrl',
-		[ '$scope', '$routeParams', 'Beer',
-				function($scope, $routeParams, Beer) {
-
-					$scope.beer = Beer.get({
-						beerId : $routeParams.beerId
-					}, function(beer) {
-						$scope.mainImg = beer.img;
-					});
-
-					$scope.setImage = function(img) {
-						$scope.mainImg = img;
-					}
-				} ])
-
-.controller('BeerCreateCtrl', [ '$scope', '$http', function($scope, $http) {
+		$scope.setImage = function(img) {
+			$scope.mainImg = img;
+		}
+	} ])
+	.controller('BeerCreateCtrl', [ '$scope', '$http', function($scope, $http) {
 	$scope.master = {};
 	// create a blank object to handle form data.
 	$scope.beer = {};
 	// calling our submit function.
 
 	$scope.update = function(beer) {
-
+		console.log($scope.beer);
+		console.log(beer);
 		// Posting data to php file
 		$http({
 			method : 'POST',
@@ -47,15 +42,12 @@ angular.module('BeerControllers', []).controller('BeerListCtrl',
 				$scope.errorUserName = data.errors.username;
 				$scope.errorEmail = data.errors.email;
 			} else {
-				$scope.message = data.message;
+				console.log(data);
+
+				location.$scope.message = data.message;
 			}
 		});
 	};
-/*
-	$scope.update = function(beer) {
-		$scope.master = angular.copy(beer);
-	};
-*/
 	$scope.reset = function() {
 		$scope.beer = angular.copy($scope.master);
 	};
