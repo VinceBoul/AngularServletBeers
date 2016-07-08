@@ -34,3 +34,6 @@ Tuer le processus :
 ```
 taskkill /f /pid <PROCESS ID>
 ```
+
+## Problème de librairie Servlet
+Prendre la version 3.0 : http://www.java2s.com/Code/Jar/s/Downloadservlet3apijar.htm
