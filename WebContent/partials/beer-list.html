@@ -57,14 +57,24 @@
 							<p>{{beer.drinkInstructions}}</p>
 
 						</div>
-						<div class="extra">
-							<a class="ui right floated primary button" href="#/edit/{{beer.id}}">
-								Éditer<i class="right write icon"></i>
-							</a>
-							<div class="ui label"><i class="right write icon"></i>Alcohol : {{ beer.alcohol}}%</div>
+						<div class="extra">							  
+							<div class="ui left floated label"><i class="right write icon"></i>Alcohol : {{ beer.alcohol }}%</div>
+							<div class="ui right floated">
+								<a class="ui primary button" href="#/edit/{{beer.id}}">
+									<i class="left write icon"></i>Éditer
+								</a>
+								<a class="ui primary button" href="#/delete/{{beer.id}}">
+									<i class="left remove icon"></i>Supprimer
+								</a>
+							</div>						
 						</div>
-						<div class="extra">Additional Details</div>
-						
+						<div class="extra">
+							<div class="ui segment">
+								<p>
+									Comment la servir : {{ beer.serving }}
+								</p>
+							</div>
+						</div>
 					</div>
 
 				</div>

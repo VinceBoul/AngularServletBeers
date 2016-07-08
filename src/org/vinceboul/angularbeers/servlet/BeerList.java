@@ -3,14 +3,12 @@ package org.vinceboul.angularbeers.servlet;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.vinceboul.angularbeers.dao.BeerMongoDAO;
 import org.vinceboul.angularbeers.model.Beer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -36,7 +34,6 @@ public class BeerList extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		List<Beer> beerList = Beer.getBeers();
-		
 		// ObjectMapper 
 		ObjectMapper mapper = new ObjectMapper();
 		// Tranformation de la liste d'objets en JSON

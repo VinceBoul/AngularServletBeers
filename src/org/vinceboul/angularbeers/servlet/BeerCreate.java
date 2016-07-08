@@ -43,6 +43,7 @@ public class BeerCreate extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Initialisation du reader
 		this.beerReader = request.getReader();
+		
 		// Création d'une nouvelle bière
 		this.createBeer();
 		
@@ -52,7 +53,6 @@ public class BeerCreate extends HttpServlet {
 		try {
 			this.beer = this.mapper.readValue(this.getJSON(), Beer.class);
 			BeerMongoDAO.getBeerMongoDAOInstance().insertBeer(beer);
-
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
