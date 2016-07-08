@@ -7,50 +7,53 @@
 </div>
 <div class="ui divider"></div>
 <div class="row">
-	<img ng-src="{{mainImg}}" class="beer">
-
-	<h1>{{beer.name}}</h1>
-
-	<p>{{beer.description}}</p>
-
+	<div class="ui items">
+		<div class="item">
+			<div class="image">
+				<img ng-src="{{mainImg}}">
+			</div>
+			<div class="content">
+				<a class="header">{{beer.name}}</a>
+				<div class="meta">
+					<span>Description</span>
+				</div>
+				<div class="description">
+					<p>{{beer.description}}</p>
+					<table class="ui celled padded table">
+						<thead>
+							<tr>
+								<th class="single line">Brasserie</th>
+								<th>Alcool</th>
+								<th>Disponibilité</th>
+								<th>Style</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<h2 class="ui center aligned header">{{ beer.brewery }}</h2>
+								</td>
+								<td>
+									<div class="ui star rating" data-rating="{{ beer.alcohol }}"
+										data-max-rating="10"></div>
+								</td>
+								<td class="right aligned">{{ beer.availability }} <br>
+									<a href="#">Commander</a>
+								</td>
+								<td>{{ beer.style }}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 
 	<ul class="beer-thumbs">
 		<li><img ng-src="{{beer.img}}" ng-click="setImage(beer.img)">
 		</li>
 		<li><img ng-src="{{beer.label}}" ng-click="setImage(beer.label)">
 		</li>
 	</ul>
-
-	<ul class="specs">
-		<li>
-			<dl>
-				<dt>Alcohol content</dt>
-				<dd>{{beer.alcohol | strongAlcohol }}</dd>
-			</dl>
-		</li>
-		<li>
-			<dl>
-				<dt>Brewery</dt>
-				<dd>{{beer.brewery}}</dd>
-			</dl>
-		</li>
-		<li>
-			<dl>
-				<dt>Availability</dt>
-				<dd>{{beer.availability}}</dd>
-			</dl>
-		</li>
-		<li>
-			<dl>
-				<dt>Style</dt>
-				<dd>{{beer.style}}</dd>
-			</dl>
-		</li>
-		<li>
-			<dl>
-				<dt>Serving instructions</dt>
-				<dd>{{beer.serving}}</dd>
-			</dl>
-		</li>
-	</ul>
-
+ -->
 </div>

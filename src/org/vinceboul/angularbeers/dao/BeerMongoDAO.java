@@ -144,4 +144,9 @@ public class BeerMongoDAO {
 
 		return beer;
 	}
+
+	public void deleteBeer(Beer beer) {
+		//Document newDoc = this.generateBeerDocument(beer);
+		this.collection.deleteOne(Filters.eq("id", beer.getId()));
+	}
 }

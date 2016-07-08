@@ -57,14 +57,21 @@
 							<p>{{beer.drinkInstructions}}</p>
 
 						</div>
-						<div class="extra">							  
-							<div class="ui left floated label"><i class="right write icon"></i>Alcohol : {{ beer.alcohol }}%</div>
+						<div class="extra">
+							<div class="ui left floated">
+								<div class="tag labels">
+								<a class="ui label"><i class="right write icon"></i>Alcohol : {{ beer.alcohol }}%</a>
+								<a class="ui label"><i class="right marker icon"></i>Brewery : {{ beer.brewery }}</a>
+								</div>
+							</div>							  
 							<div class="ui right floated">
 								<a class="ui primary button" href="#/edit/{{beer.id}}">
 									<i class="left write icon"></i>Éditer
 								</a>
-								<a class="ui primary button" href="#/delete/{{beer.id}}">
+								<a class="ui primary button" aria-label="Toggle ngHide"
+									 ng-click="suppr(beer)" href="#">
 									<i class="left remove icon"></i>Supprimer
+									<div class="check-element animated flipInX ng-hide">Bière supprimée</div>
 								</a>
 							</div>						
 						</div>

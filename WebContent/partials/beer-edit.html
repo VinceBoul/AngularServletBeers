@@ -12,7 +12,7 @@
 	<div>
 		<div ng-controller="BeerEditCtrl">
 			<form novalidate class="ui form">
-				<div class="ui reveal hidden content">
+				<div style="display:none">
 					<input ng-model="beer.id" type="text" />
 					<input ng-model="beer.label" type="text" />
 					<input ng-model="beer.image" type="text" />
@@ -54,9 +54,8 @@
 							placeholder="Description..."></textarea>
 					</div>
 				</div>
-				<input class="ui submit primary button" type="submit"
-					ng-click="update(beer)" value="Créer" /> <input class="ui button"
-					type="button" ng-click="reset()" value="Reset" />
+				<input class="ui submit primary button" type="submit" ng-click="update(beer)" value="Modifier" />
+				<input class="ui button" type="button" ng-click="reset()" value="Reset" />
 			</form>
 			<pre>beer = {{beer | json}}</pre>
 			<pre>master = {{master | json}}</pre>

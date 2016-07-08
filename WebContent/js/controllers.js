@@ -11,6 +11,26 @@ angular.module('BeerControllers', [])
 
 	    $scope.orderProp = 'alcohol';
 		
+		$scope.suppr = function(beer) {
+			$http({
+				method : 'POST',
+				url : 'BeerDelete',
+				data : beer, // forms user object
+				headers : {
+					'Content-Type' : 'application/x-www-form-urlencoded'
+				}
+			}).success(function(data) {
+				if (data.errors) {
+					// Showing errors.
+					$scope.errorName = data.errors.name;
+					$scope.errorUserName = data.errors.username;
+					$scope.errorEmail = data.errors.email;
+				} else {					
+					console.log(data);
+					//$window.location.href = '#/beers';
+				}
+			});
+		}
 	} ])
 	.controller( 'BeerDetailCtrl', [ '$scope', '$routeParams', '$http', function($scope, $routeParams, $http) {
 		$http({
@@ -60,6 +80,10 @@ angular.module('BeerControllers', [])
 				}
 			});
 		}
+	} ])
+	.controller( 'BeerDeleteCtrl', [ '$scope', '$routeParams', '$http', function($scope, $routeParams, $http) {
+
+	
 	} ])
 	.controller('BeerCreateCtrl', [ '$scope', '$http', '$window', function($scope, $http, $window) {
 		$scope.master = {};
